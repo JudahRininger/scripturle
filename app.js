@@ -64,6 +64,7 @@ app.post("/v1", (req, res)=> {
   function setCharAt(str,index,chr) {
     if(index > str.length-1) return str;
     return str.substring(0,index) + chr + str.substring(index+1);
+  }
 }
 
    
@@ -135,67 +136,30 @@ app.post("/v1", (req, res)=> {
   //   ]
   // }
   
+app.get('/v2', (req, res)=> {
+  res.render('v2');
+});
+
+app.post("/v2", (req, res)=> {
+
+  let secretWord = "hebrews".toUpperCase();
+
+  // extract the guess value from the body
+  const guess = req.body.guess.toUpperCase();
+
+  let result = []; // = computeResult();
+
+  if(guess === secretWord) {
+    result = ['correct', 'correct', 'correct','correct','correct','correct','correct'];
+  }
+  else {
+    result = ['correct', 'misplaced', 'incorrect','incorrect','incorrect','misplaced','misplaced'];
+  }
 
   console.log(result);
 
   // return the guess
   res.render('v1', {result: result} ) ;
-
-});
-
-
-/* EXAMPLE */
-
-let mark = { first: "Mark", last: "Hamill", age: "70" };
-
-app.get("/example/:age", (req, res) => {
-  let ageSentence = "";
-  const age = parseInt(req.params.age);
-
-  if (age > mark.age) {
-    ageSentence = "You're older than Mark Hamill!";
-  } else if (age < mark.age) {
-    ageSentence = "You're younger than Mark Hamill!";
-  } else {
-    ageSentence = "You are Mark Hamill!";
-  }
-  const page = `<html>
-                    <head> </head>
-                    <body> 
-                      <h1> Example </h1>
-                      <p> ${ageSentence} </p>
-                    </body>
-                </html>`;
-
-  //res.render('index', ageSentence);
-
-  res.send(page);
-});
-
-
-app.post('/example', (req,res) => {
-
-  let age = req.body.age;
-
-  if (age > mark.age) {
-    ageSentence = "You're older than Mark Hamill!";
-  } else if (age < mark.age) {
-    ageSentence = "You're younger than Mark Hamill!";
-  } else {
-    ageSentence = "You are Mark Hamill!";
-  }
-  const page = `<html>
-                    <head> </head>
-                    <body> 
-                      <h1> Example </h1>
-                      <p> ${ageSentence} </p>
-                    </body>
-                </html>`;
-
-  //res.render('index', ageSentence);
-
-  res.send(page);
-
 });
 
 
