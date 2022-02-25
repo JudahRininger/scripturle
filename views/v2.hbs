@@ -12,9 +12,9 @@
     {{#if result }}
     <h2> {{ result }} </h2>
     {{/if}} --}}
-
+    {{#each guesses}}
     <div class="row">
-      {{#each result}}
+      {{#each this}}
 
         <input
         type="text"
@@ -27,6 +27,7 @@
 
       {{/each}}
     </div>
+    {{/each}}
     <div class="row">
       <input type="text" text="" class="letter" maxlength="1" autofocus />
       <input type="text" text="" class="letter" maxlength="1" />
