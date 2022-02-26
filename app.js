@@ -94,11 +94,15 @@ app.get('/v2', (req, res)=> {
   if( !req.session.guesses) {
     req.session.guesses = [];
   }
+  let secretWord = "hebrews".toUpperCase();
   let guesses = req.session.guesses
-
-  res.render('v2', {
-    guesses:guesses
-  });
+  let visibility = 'visible'
+  if(guesses.length >= 7) {
+    res.render('v2-2', {guesses:guesses, secretWord:secretWord}) ;
+  }
+  else{
+    res.render('v2', {guesses:guesses, visibility: visibility}) ;
+  }
 });
 
 app.post("/v2", (req, res)=> {
@@ -140,8 +144,6 @@ app.post("/v2", (req, res)=> {
             result.push({ letter: guess[i],
                           state: 'incorrect'})
           }
-
-
         }
         else {
           result.push({ letter: guess[i],
@@ -158,7 +160,41 @@ app.post("/v2", (req, res)=> {
   // console.log(result);
   req.session.guesses.push(result);
   console.log(req.session.guesses);
-  res.render('v2', {guesses: req.session.guesses} ) ;
+  let visibility = 'visible'
+  if(req.session.guesses.length >= 7) {
+    visibility = 'hidden'
+  }
+  if(guess == secretWord) {
+    res.render('v2-3', {guesses: req.session.guesses, secretWord:secretWord})
+  }
+  if(req.session.guesses.length >= 7) {
+    res.render('v2-2', {guesses: req.session.guesses, secretWord:secretWord}) ;
+  }
+  else {
+    res.render('v2', {guesses: req.session.guesses, visibility: visibility}) ;
+  }
+  
+});
+app.post("/v2-2", (req, res)=> {
+
+  if( !req.session.guesses) {
+    req.session.guesses = [];
+  }
+
+  let secretWord = "hebrews".toUpperCase();
+  // console.log(result);
+  res.render('v2-2', {guesses: req.session.guesses, secretWord: secretWord}) ;
+});
+
+app.post("/v2-3", (req, res)=> {
+
+  if( !req.session.guesses) {
+    req.session.guesses = [];
+  }
+
+  let secretWord = "hebrews".toUpperCase();
+  // console.log(result);
+  res.render('v2-3', {guesses: req.session.guesses, secretWord: secretWord}) ;
 });
 
 
@@ -168,3 +204,4 @@ const hostname = process.env.hostname || "localhost";
 app.listen(port, () => {
   console.log(`Running server on http://${hostname}:${port}`);
 });
+

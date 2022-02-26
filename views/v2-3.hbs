@@ -1,0 +1,30 @@
+<div class="container">
+
+  <header>
+    <a href="/" class="logo"><i class="fas fa-bible"></i></a>
+    <h1>SCRIPTURLE</h1>
+    <a href="" class="settings"><i class="fas fa-cog"></i></a>
+  </header>
+
+  <main>
+    {{#each guesses}}
+    <div class="row">
+      {{#each this}}
+
+        <input
+        type="text"
+        text=""
+        class="letter {{this.state}}"
+        maxlength="1"
+        disabled
+        value="{{this.letter}}"
+      />
+
+      {{/each}}
+    </div>
+    {{/each}}
+    
+  </main>
+    <h1 class="middle2">- {{secretWord}} -</h1>
+    <h1 class="middle">- is Correct! -</h1>
+</div>

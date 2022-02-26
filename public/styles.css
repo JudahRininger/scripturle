@@ -41,6 +41,23 @@ h1 {
     font-size: 3rem;
     font-weight: 800;
 }
+.middle {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #36be14;
+    padding-left: 3rem;
+}
+.middle2 {
+    display: flex;
+    align-items: center;
+    padding-left: 3.4rem;
+}
+.middle3 {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #be2814;
+    padding-left: 3rem;
+}
 
 main {
     padding: 1rem;
